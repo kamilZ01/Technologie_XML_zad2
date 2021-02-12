@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ga="http://example.org/genres"
+           xmlns:kr="http://example.org/countries">
+    <xs:import schemaLocation="gatunki.xsd"
+               namespace="http://example.org/genres"/>
+    <xs:import schemaLocation="kraje.xsd"
+               namespace="http://example.org/countries"/>
+    
+    <xs:element type="filmyType" name="filmy">
+      
+        <xs:key name="key_gatunekID">
+            <xs:selector xpath="./gatunki/*"/>
+            <xs:field xpath="@gatunek_id"/>
+        </xs:key>
+        <xs:keyref name="keyref_gatunek" refer="key_gatunekID">
+            <xs:selector xpath="./film"/>
+            <xs:field xpath="@gatunek"/>
+        </xs:keyref>
+        
+        <xs:key name="key_krajID">
+            <xs:selector xpath="./kraje/*"/>
+            <xs:field xpath="@kraj_id"/>
+        </xs:key>
+        <xs:keyref name="keyref_kraj" refer="key_krajID">
+            <xs:selector xpath="./film"/>
+            <xs:field xpath="@kraj"/>
+        </xs:keyref>
+    </xs:element>
+    
+    <xs:complexType name="filmyType">
+        <xs:sequence>
+            <xs:element name="dane_techniczne" type="dane_techniczneType"/>
+            <xs:element name="gatunki" type="ga:gatunkiType" />
+            <xs:element name="kraje" type="kr:krajeType" />
+            <xs:element name="film" type="filmType" minOccurs="1" maxOccurs="22"/>
+            <xs:element name="prawa_autorskie" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- dane_techniczne -->
+    <xs:complexType name="dane_techniczneType">
+        <xs:sequence>
+            <xs:group ref="dane_techniczneGroup"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:group name="dane_techniczneGroup">
+        <xs:sequence>
+            <xs:element name="tytuł" type="xs:string" />
+            <xs:element name="informacje" type="xs:string" />
+            <xs:element name="autorzy" type="autorzyType" />
+        </xs:sequence>
+    </xs:group>
+    
+    <xs:complexType name="autorzyType" >
+        <xs:sequence>
+            <xs:element name="twórca" maxOccurs="2" type="twórcaType" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="twórcaType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                        <xs:attribute name="nrIndeksu" use="required" type="indexRest"/>
+            </xs:extension>      
+        </xs:simpleContent>
+    </xs:complexType>
+    
+    <xs:simpleType name="indexRest">
+            <xs:restriction base="xs:nonNegativeInteger">
+                <xs:pattern value="[0-9]{6}" />  
+            </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- film -->
+   
+    <xs:complexType name="filmType">
+        <xs:sequence>
+            <xs:element name="bazy_filmowe" type="bazyType" />
+            <xs:element name="dane" type="daneType" />
+            <xs:element name="oceny" type="ocenyType" />
+            <xs:element name="premiery" type="premieryType" />
+            <xs:element name="wypożyczenie" type="wypożyczenieType" />
+            <xs:element name="kolejność" type="kolejnośćType" />
+        </xs:sequence>
+        <xs:attributeGroup ref="filmattrGroup" />
+    </xs:complexType>
+    
+   <xs:attributeGroup name="filmattrGroup">
+       <xs:attribute name="id" type="xs:ID" use="required"/>
+       <xs:attribute name="gatunek" type="xs:string" use="required" />
+       <xs:attribute name="kraj" type="xs:string" use="required" />
+   </xs:attributeGroup>
+    
+   <xs:complexType name="bazyType"> 
+       <xs:attribute name="filmweb" use="required" type="xs:string"/>
+       <xs:attribute name="imdb" use="required" type="xs:string"/>
+   </xs:complexType>
+   
+   <xs:complexType name="daneType">
+       <xs:sequence>
+           <xs:element name="tytuł_org" type="lengthRest"/>
+           <xs:element name="tytuł_pl"  type="xs:string"/>
+           <xs:element name="opis" type="lengthRest"/>
+           <xs:element name="reżyseria" type="lengthRest"/>
+           <xs:element name="scenariusz" type="lengthRest"/>
+           <xs:element name="boxoffice" type="boxRest"/>
+       </xs:sequence>
+   </xs:complexType>
+   
+   <xs:simpleType name="lengthRest">
+       <xs:restriction base="xs:string">
+           <xs:minLength value="1"/>
+       </xs:restriction>
+   </xs:simpleType>
+   
+   <xs:complexType name="boxRest">
+       <xs:simpleContent>
+           <xs:extension base="xs:string">
+               <xs:attribute name="waluta" type="walutaRest"/>
+           </xs:extension>
+       </xs:simpleContent>
+    </xs:complexType>
+    <xs:simpleType name="walutaRest">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="USD"/>
+            <xs:enumeration value="PLN"/>
+            <xs:enumeration value="EUR"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="ocenyType">
+        <xs:sequence>
+            <xs:element name="filmweb"  type="ocenaTyp"/>
+            <xs:element name="imdb"  type="ocenaTyp"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="ocenaTyp">
+        <xs:restriction base="xs:decimal">
+            <xs:fractionDigits value="1"/>
+            <xs:totalDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="premieryType">
+        <xs:sequence>
+            <xs:element name="polska"  type="polskaRest"/>
+            <xs:element name="świat"  type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="polskaRest">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="xs:date"/>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:length value="0" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    
+    
+     <xs:complexType name="wypożyczenieType">
+        <xs:sequence>
+            <xs:element name="data_wypożyczenia"  type="xs:date"/>
+            <xs:element name="data_zwrotu"  type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="kolejnośćType">
+        <xs:sequence>
+            <xs:element name="numer"  type="numerRest"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="numerRest">
+       <xs:simpleContent>
+           <xs:extension base="numersRest">
+               <xs:attribute name="idNumer" >
+                    <xs:simpleType>
+                        <xs:restriction base="xs:positiveInteger">
+                            <xs:minInclusive value="1"/>
+                            <xs:maxInclusive value="22"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+               </xs:attribute>
+           </xs:extension>
+       </xs:simpleContent>
+    </xs:complexType>
+    
+    <xs:simpleType name="numersRest">
+        <xs:restriction base="xs:string">
+                <xs:pattern value="/22"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

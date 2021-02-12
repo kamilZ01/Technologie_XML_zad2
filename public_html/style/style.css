@@ -1,0 +1,433 @@
+filmy {
+    font-family: Times New Roman, serif;
+    background-image: url(../img/bg.jpg);
+    background-size: 100%;
+    background-position: top center;
+    background-repeat:no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+
+tytuł {
+    display:block;
+    text-align:center;
+    margin: 30px 0px;
+    font-size:3.2em;
+    font-variant: small-caps;
+    text-shadow: #403f3f 1px 0 10px;
+    transition: all 1s;
+}
+
+informacje {
+    display: block;
+    text-align:center;
+    background: rgba(127, 127, 127, 0.1);
+    margin:20px auto;
+    border-radius:10px;
+    padding:10px;
+    width:70%;
+}
+
+autorzy::before {
+    content:"Autorzy:";
+}
+
+twórca:after {
+    content:" " attr(nrIndeksu);
+}
+numer:before {
+    content: attr(idNumer);
+}
+
+autorzy {
+    margin-top:20px;
+    text-align: center;
+    display: block;
+    font-size: 2em;
+}
+
+gatunki, kraje {
+    white-space:nowrap;
+    overflow: hidden;
+    font-size:0px;
+}
+
+@media screen and (max-width: 1250px) {
+    film {
+        width: 95%;
+    }
+}
+
+@media screen and (min-width: 1250px) and (max-width: 1520px) {
+    film {
+        width: 75%;
+    }
+}
+
+@media screen and (min-width: 1520px) {
+    film {
+        width: 60%;
+    }
+}
+
+film {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 220px auto 200px;
+    margin:40px auto;
+    padding:15px;
+    border:solid 2px black;
+    border-radius:10px;
+    box-shadow: 3px 3px 10px 5px #8a8c8c;
+    background: rgba(200, 200, 200, 0.6);
+    height:50px;
+    transition: height 2s;
+    overflow: hidden;
+}
+
+tytuł_org {
+    display:block;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0 auto;
+    transition: all 1s;
+}
+
+tytuł_pl {
+    text-align: center;
+    font-size: 1.4em;
+    margin:10px auto;
+    font-style: italic;
+}
+
+reżyseria::before {
+    content:"Reżyseria: ";
+}
+
+reżyseria {
+    margin-top:10px;
+    display:block;
+    text-align: center;
+}
+
+premiery polska {
+    text-align: left;
+}
+
+premiery świat{
+    text-align: left;
+}
+
+scenariusz::before {
+    content:"Scenariusz: ";
+}
+
+scenariusz, boxoffice, filmweb, imdb, polska, świat, data_wypożyczenia, data_zwrotu{
+    text-align: center;
+    margin-top: 2px;
+    opacity:0;
+}
+
+opis {
+    text-align: center;
+    font-style:italic;
+    margin:0 10%;
+}
+
+oceny {
+    justify-items:end;
+    align-items: stretch;
+}
+
+oceny filmweb{
+     text-align:right;
+}
+
+oceny imdb {
+    text-align: right;
+}
+
+boxoffice::before {
+     content:"Box office: ";
+}
+
+boxoffice:after {
+    content: " " attr(waluta);
+}
+
+numer {
+    font-variant: small-caps;
+    text-shadow: #403f3f 2px 0 10px;
+    padding:5% 0;
+    font-size:1.2em;
+}
+
+film:hover {
+    background:rgba(182,166,133,0.3);
+    transition: .4s ease .25s;
+    height: 280px;
+}
+
+tytuł_pl, opis, reżyseria, scenariusz,boxoffice,polska, świat, data_wypożyczenia,data_zwrotu, numer {
+    opacity:0;
+    -webkit-transition: opacity 1s ease-in;
+    -moz-transition: opacity 1s ease-in;
+    -ms-transition: opacity 1s ease-in;
+    -o-transition: opacity 1s ease-in;
+    transition: opacity 0.5s ease-out;
+    display:block;
+}
+
+filmweb, imdb {
+    opacity:1;
+    display:block;
+}
+
+film[id="Smith"] bazy_filmowe {
+    background-image: url('../okładki/smith.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="Joker"] bazy_filmowe {
+    background-image: url('../okładki/joker.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="mRycerz"] bazy_filmowe {
+    background-image: url('../okładki/mRycerz.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+
+film[id="Avengers"] bazy_filmowe {
+    background-image: url('../okładki/avengers.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="bHero"] bazy_filmowe {
+    background-image: url('../okładki/bigHero.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="Wonder"] bazy_filmowe {
+    background-image: url('../okładki/wonder.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="Exorcist"] bazy_filmowe {
+    background-image: url('../okładki/exorcist.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="Conjuring"] bazy_filmowe {
+    background-image: url('../okładki/conjuring.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="bFish"] bazy_filmowe {
+    background-image: url('../okładki/bigFish.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="Seven"] bazy_filmowe {
+    background-image: url('../okładki/seven.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="sIsland"] bazy_filmowe {
+    background-image: url('../okładki/sIsland.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="Prestige"] bazy_filmowe {
+    background-image: url('../okładki/prestige.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="fGump"] bazy_filmowe {
+    background-image: url('../okładki/fGump.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="Cidade"] bazy_filmowe {
+    background-image: url('../okładki/cidade.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="Millenium"] bazy_filmowe {
+    background-image: url('../okładki/millenium.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="Haevnen"] bazy_filmowe {
+    background-image: url('../okładki/haevnen.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="Return"] bazy_filmowe {
+    background-image: url('../okładki/return.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="dHour"] bazy_filmowe {
+    background-image: url('../okładki/dhour.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="Hardcore"] bazy_filmowe {
+    background-image: url('../okładki/hardcore.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="Fall"] bazy_filmowe {
+    background-image: url('../okładki/fall.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="Psycho"] bazy_filmowe {
+    background-image: url('../okładki/psycho.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film[id="mAdentro"] bazy_filmowe {
+    background-image: url('../okładki/adentro.jpg');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    transition: height 2s ease-in-out;
+    transition: width 2s ease-in-out;
+    transition: background-size 1.6s ease-in-out;
+}
+
+film:hover bazy_filmowe {
+    width:220px;
+    height:200px;
+    background-size: 130px;
+}
+kolejność numer {
+    text-align:right;
+    font-weight: bold;
+}
+
+film:hover tytuł_pl, film:hover opis, film:hover imdb, film:hover numer, film:hover świat, film:hover data_wypożyczenia, film:hover data_zwrotu, film:hover polska, film:hover reżyseria, film:hover scenariusz, film:hover filmweb, film:hover boxoffice{
+    opacity:1;
+}
+
+filmweb::before {
+    content:"Ocena Filmweb: ";
+}
+
+imdb::before {
+    content: "Ocena imdb: ";
+}
+
+polska::before {
+    content:"Premiera w Polsce: ";
+}
+
+świat::before {
+    content:"Premiera na świecie: ";
+}
+
+data_wypożyczenia::before {
+    content:"Data wypożyczenia: ";
+}
+
+data_zwrotu::before {
+    content:"Data zwrotu: ";
+}
+
+prawa_autorskie {
+    display: block;
+    text-align: center;
+    margin: 30px 0px;
+    font-size:1.6em;
+    font-variant: small-caps;
+    text-shadow: #403f3f 1px 0 10px;
+    transition: all 1s;
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://example.org/countries"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://example.org/countries"
+           elementFormDefault="qualified">
+    
+    <xs:complexType name="krajeType">
+        <xs:sequence>
+            <xs:element name="kraj" type="krajType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="krajType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="kraj_id" use="required" type="krajIdRest" />
+            </xs:extension>      
+        </xs:simpleContent>
+    </xs:complexType>
+     <xs:simpleType name="krajIdRest">
+            <xs:restriction base="xs:string">
+                <xs:pattern value="[A-Z]{2,3}"/> 
+            </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

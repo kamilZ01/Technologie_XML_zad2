@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://example.org/genres"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://example.org/genres"
+           elementFormDefault="qualified">
+    
+    <xs:complexType name="gatunkiType">
+        <xs:sequence>
+            <xs:element name="gatunek" type="gatunekType" minOccurs="1" maxOccurs="unbounded"/>     
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="gatunekType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="gatunek_id" use="required" type="gatunekIdRest" />
+            </xs:extension>      
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:simpleType name="gatunekIdRest">
+            <xs:restriction base="xs:string">
+                <xs:pattern value="([a-zżźćńółęąś-])*"/> 
+            </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
